@@ -42,9 +42,25 @@ class HomeVC: UIViewController {
 //                print(error)
 //            }
 //        }
+//        APICaller.shared.getTrendingTvs { _ in
+//
+//        }
         
+//        APICaller.shared.getUpcomingMovies { _ in
+//
+//        }
+        
+//        APICaller.shared.getPopular { _ in
+//
+//        }
+        
+//        APICaller.shared.getTopRated { _ in
+//            
+//        }
         
     }
+    
+    
     
     private func setupView() {
         view.backgroundColor = .systemBackground
