@@ -65,6 +65,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52957B5828C8CE220001073C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				52BF08E328C5C1E300F19227 /* MainTabBarVC.swift */,
+				52BF08F428C5C5B300F19227 /* HomeVC.swift */,
+				52BF08F628C5C62100F19227 /* UpcomingVC.swift */,
+				52BF08F928C5C64700F19227 /* SearchVC.swift */,
+				52BF08FB28C5C66D00F19227 /* DownloadsVC.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		52957B5928C8CE480001073C /* General */ = {
+			isa = PBXGroup;
+			children = (
+				52957B5628C8CCC10001073C /* SearchResultsVC.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
 		52BF08D328C5C1E300F19227 = {
 			isa = PBXGroup;
 			children = (
@@ -102,12 +122,8 @@
 		52BF08F328C5C58F00F19227 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				52BF08E328C5C1E300F19227 /* MainTabBarVC.swift */,
-				52BF08F428C5C5B300F19227 /* HomeVC.swift */,
-				52BF08F628C5C62100F19227 /* UpcomingVC.swift */,
-				52BF08F928C5C64700F19227 /* SearchVC.swift */,
-				52BF08FB28C5C66D00F19227 /* DownloadsVC.swift */,
-				52957B5628C8CCC10001073C /* SearchResultsVC.swift */,
+				52957B5928C8CE480001073C /* General */,
+				52957B5828C8CE220001073C /* Core */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
