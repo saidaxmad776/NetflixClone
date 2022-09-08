@@ -32,7 +32,9 @@ class HomeVC: UIViewController {
         setDelegate()
         configureNavBar()
         
-        APICaller.shared.getMovie(with: "Harry potter")
+        APICaller.shared.getMovie(with: "Harry poter") { results in
+            
+        }
         
     }
     
