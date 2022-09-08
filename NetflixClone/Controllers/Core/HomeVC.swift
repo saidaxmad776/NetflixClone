@@ -31,11 +31,7 @@ class HomeVC: UIViewController {
         setupView()
         setDelegate()
         configureNavBar()
-        
-        APICaller.shared.getMovie(with: "Harry poter") { results in
-            
-        }
-        
+                
     }
     
     override func viewDidLayoutSubviews() {
@@ -177,5 +173,15 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
+}
+
+
+extension HomeVC: CollectionTableViewCellDelegate {
     
+    func collectionTableViewCellDidTapCell(_ cell: CollectionTableViewCell, viewModel: TitlepreviewViewModel) {
+        let vc = TitlePreviewViewController()
+        vc.configure(with: viewModel)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
 }
