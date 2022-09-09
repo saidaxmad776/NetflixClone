@@ -27,9 +27,22 @@ class DownloadsVC: UIViewController {
         
         downloadedTable.delegate = self
         downloadedTable.dataSource = self
+        
+        fetchLocalStorageForDownload()
     }
     
 
+    private func fetchLocalStorageForDownload() {
+        DataPersistenceManager.shared.fetchingTitlesFromDataBase { [weak self] result in
+            switch result {
+            case .success(let titles):
+                self?.titles = titles
+                self?.downloadedTable.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension DownloadsVC: UITableViewDelegate, UITableViewDataSource {

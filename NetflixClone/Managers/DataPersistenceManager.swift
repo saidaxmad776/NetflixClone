@@ -14,6 +14,7 @@ class DataPersistenceManager {
     
     enum DatabasError: Error {
         case failedToSaveData
+        case failedToFetchData
     }
     
     static let shared = DataPersistenceManager()
@@ -55,9 +56,10 @@ class DataPersistenceManager {
         request = TitleItem.fetchRequest()
         
         do {
-            
+           let titles = try context.fetch(request)
+            complection(.success(titles))
         } catch {
-            
+            complection(.failure(DatabasError.failedToFetchData))
         }
     }
 }
