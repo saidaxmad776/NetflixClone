@@ -86,9 +86,32 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         150
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        
+        guard let titleName = title.original_title ?? title.original_name else {
+            return
+        }
+        
+        APICaller.shared.getMovie(with: titleName) { [weak self] result in
+            switch result {
+            case .success(let videoElement):
+                DispatchQueue.main.async {
+                    let vc = TitlePreviewViewController()
+                    vc.configure(with: TitlepreviewViewModel(title: titleName, youtubeView: videoElement, titleOverview: title.overview ?? ""))
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
 }
 
-extension SearchVC: UISearchResultsUpdating {
+extension SearchVC: UISearchResultsUpdating, SearchResultsVCDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
@@ -99,6 +122,8 @@ extension SearchVC: UISearchResultsUpdating {
               let resultsController = searchController.searchResultsController as? SearchResultsVC else {
                   return
               }
+        
+        resultsController.delegate = self
         
         APICaller.shared.search(with: query) { results in
             DispatchQueue.main.async {
@@ -111,6 +136,16 @@ extension SearchVC: UISearchResultsUpdating {
                 }
             }
         }
+    }
+    
+    func searchResultsVCDidTapItem(_ viewModel: TitlepreviewViewModel) {
+        
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
 }
